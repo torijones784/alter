@@ -58,14 +58,6 @@
             createParticles();
             enhanceGradient();
         });
-
-        document.addEventListener('mousemove', function(e) {
-            const gradientBg = document.querySelector('.gradient-bg');
-            const x = e.clientX / window.innerWidth;
-            const y = e.clientY / window.innerHeight;
-
-            gradientBg.style.backgroundPosition = `${x * 100}% ${y * 100}%`;
-        });
     </script>
 </body>
 </html>
