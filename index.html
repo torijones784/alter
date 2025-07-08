@@ -7,6 +7,61 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>test</h1>
+    <div class="gradient_container">
+
+    </div>
+    
+    <div>
+        <h1>Placeholder for gradient cover height test</h1>
+    </div>
+
+    <script>
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        function enhanceGradient() {
+            const gradientBg = document.querySelector('.gradient-bg');
+            let angle = 0;
+            
+            setInterval(() => {
+                angle += 0.3;
+                gradientBg.style.background = `linear-gradient(
+                    ${angle}deg, 
+                    #161616,
+                    #1C1A18,
+                    #2A1810,
+                    #2A1810,
+                    #4A2C1A,
+                    #4A2C1A,
+                    #5D3420,
+                    #CC8B39,
+                    #4A2C1A,
+                    #2A1810,
+                    #161616,
+                    #161616
+                )`;
+                gradientBg.style.backgroundSize = '600% 600%';
+            }, 150);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const overlay = document.querySelector('.fade-overlay');
+            overlay.classList.add('not_active');
+
+            createParticles();
+            enhanceGradient();
+        });
+    </script>
 </body>
 </html>
