@@ -5,6 +5,14 @@
     display: block;
 }
 
+.logo {
+    justify-content: flex-start;
+}
+
+.nav_items {
+    justify-content: flex-end;
+}
+
 /* Gradient css */
 .gradient-bg {
     position: fixed;
