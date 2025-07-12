@@ -1,6 +1,8 @@
 /* Home CSS */
 .laptop_menu {
     background-color: #88304E;
+    height: 15%; 
+    display: block;
 }
 
 /* Gradient css */
