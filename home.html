@@ -4,18 +4,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alter | For Women Who Are Ready</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="laptop_menu">
-        <h1 class="logo">Alter</h1>
+    <nav class="laptop_menu">
+        <a href="#" class="logo">Alter</a>
+        
         <div class="nav_items">
-            <h2>Home</h2>
-            <h2>About</h2>
-            <h2>Contact</h2>
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+            <a href="#" class="cta_button">Get Started</a>
         </div>
+
+        <div class="mobile_menu" onclick="toggleMobileMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="mobile_nav" id="mobileNav">
+            <div class="mobile_nav_header">
+                <div style="background: linear-gradient(135deg, #8B2635, #A0506D); padding: 2rem; border-radius: 15px; margin-bottom: 1rem;">
+                    <h2 class="mobile_logo_text">Alter</h2>
+                    <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem; text-transform: none; letter-spacing: normal;">For Women Who Are Ready</p>
+                </div>
+            </div>
+            <div class="mobile_nav_links">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="content">
+        <h1>For Women Who Are Ready</h1>
+        <p>Empowering women to take control of their financial future with confidence, knowledge, and strategic planning. Your journey to financial independence starts here.</p>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+
+    <script>
+        function toggleMobileMenu() {
+            const mobileMenu = document.querySelector('.mobile_menu');
+            const mobileNav = document.getElementById('mobileNav');
+            
+            mobileMenu.classList.toggle('active');
+            mobileNav.classList.toggle('active');
+        }
+
+        document.addEventListener('click', function(event) {
+            const mobileMenu = document.querySelector('.mobile_menu');
+            const mobileNav = document.getElementById('mobileNav');
+            
+            if (!event.target.closest('.mobile_menu') && !event.target.closest('.mobile_nav')) {
+                mobileMenu.classList.remove('active');
+                mobileNav.classList.remove('active');
+            }
+        });
+
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.laptop_menu');
+            if (window.scrollY > 50) {
+                navbar.style.backgroundColor = '#7a2a45';
+                navbar.style.backdropFilter = 'blur(10px)';
+            } else {
+                navbar.style.backgroundColor = '#88304E';
+                navbar.style.backdropFilter = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
