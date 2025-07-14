@@ -1,232 +1,13 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alter | For Women Who Are Ready</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <nav class="laptop_menu">
-        <a href="#" class="logo">Alter</a>
-        
-        <div class="nav_items">
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
-        </div>
-
-        <div class="mobile_menu" onclick="toggleMobileMenu()">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-
-        <div class="mobile_nav" id="mobileNav">
-            <div class="mobile_nav_header">
-                <div style="background: linear-gradient(135deg, #8B2635, #A0506D); padding: 2rem; border-radius: 15px; margin-bottom: 1rem;">
-                    <h2 class="mobile_logo_text">Alter</h2>
-                    <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem; text-transform: none; letter-spacing: normal;">For Women Who Are Ready</p>
-                </div>
-            </div>
-            <div class="mobile_nav_links">
-                <a href="#">Home</a>
-                <a href="#">About</a>
-                <a href="#">Contact</a>
-            </div>
-        </div>
-    </nav>
-
-    <div class="hero">
-        <div class="hero_image">
-            <img src="images/hero_image.png" alt="woman_crying">
-        </div>
-        <div class="hero_text">
-            <h1>Your AI Chats Won't Save You</h1>
-            <p>Empowering women to create strategic, passionate businesses.</p>
-        </div>
-    </div>
-
-    <div>
-        <h1>This is for...</h1>
-    </div>
-
-    <div>
-        <h2>Did you know...(stat)</h2>
-    </div>
-
-    <div>
-        <h1>When are you ready to stop getting started?</h1>
-    </div>
-
-    <script>
-        function toggleMobileMenu() {
-            const mobileMenu = document.querySelector('.mobile_menu');
-            const mobileNav = document.getElementById('mobileNav');
-            
-            mobileMenu.classList.toggle('active');
-            mobileNav.classList.toggle('active');
-        }
-
-        document.addEventListener('click', function(event) {
-            const mobileMenu = document.querySelector('.mobile_menu');
-            const mobileNav = document.getElementById('mobileNav');
-            
-            if (!event.target.closest('.mobile_menu') && !event.target.closest('.mobile_nav')) {
-                mobileMenu.classList.remove('active');
-                mobileNav.classList.remove('active');
-            }
-        });
-
-        window.addEventListener('scroll', function() {
-            const navbar = document.querySelector('.laptop_menu');
-            if (window.scrollY > 50) {
-                navbar.style.backgroundColor = '#7a2a45';
-                navbar.style.backdropFilter = 'blur(10px)';
-            } else {
-                navbar.style.backgroundColor = '#88304E';
-                navbar.style.backdropFilter = 'none';
-            }
-        });
-    </script>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page Flip Experience</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            overflow-x: hidden;
-            background: #2c2c2c;
-        }
-
-        .screen {
-            height: 100vh;
-            width: 100vw;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: absolute;
-            top: 0;
-            left: 0;
-            text-align: center;
-            padding: 20px;
-            transition: transform 0.3s ease-out;
-        }
-
-        .screen h1 {
-            font-size: clamp(2.5rem, 8vw, 4rem);
-            font-weight: 900;
-            line-height: 1.2;
-            max-width: 90%;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Color scheme for each screen */
-        .screen-1 {
-            background: linear-gradient(135deg, #f7f5f0 0%, #e8e2d5 100%);
-            color: #2c2c2c;
-        }
-
-        .screen-2 {
-            background: linear-gradient(135deg, #f7374f 0%, #e02d42 100%);
-            color: #f7f5f0;
-        }
-
-        .screen-3 {
-            background: linear-gradient(135deg, #88304e 0%, #752841 100%);
-            color: #f7f5f0;
-        }
-
-        .screen-4 {
-            background: linear-gradient(135deg, #522546 0%, #441f3a 100%);
-            color: #f7f5f0;
-        }
-
-        .screen-5 {
-            background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
-            color: #f7374f;
-        }
-
-        /* Container for all screens */
-        .container {
-            position: relative;
-            height: 100vh;
-            width: 100vw;
-            overflow: hidden;
-        }
-
-        /* Animation states */
-        .screen.active {
-            transform: translateY(0);
-            z-index: 3;
-        }
-
-        .screen.prev {
-            transform: translateY(-100%);
-            z-index: 2;
-        }
-
-        .screen.next {
-            transform: translateY(100%);
-            z-index: 1;
-        }
-
-        /* Scroll indicator */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite;
-            opacity: 0.7;
-        }
-
-        .scroll-indicator::before {
-            content: '↓';
-            font-size: 2rem;
-            color: currentColor;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateX(-50%) translateY(0);
-            }
-            40% {
-                transform: translateX(-50%) translateY(-10px);
-            }
-            60% {
-                transform: translateX(-50%) translateY(-5px);
-            }
-        }
-
-        /* Hide scroll indicator on last screen */
-        .screen-5 .scroll-indicator {
-            display: none;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 480px) {
-            .screen h1 {
-                font-size: clamp(2rem, 7vw, 3rem);
-            }
-            
-            .screen {
-                padding: 15px;
-            }
-        }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
@@ -291,7 +72,6 @@
             }
         }
 
-        // Handle wheel events (desktop)
         document.addEventListener('wheel', (e) => {
             if (isScrolling) return;
             
@@ -308,7 +88,6 @@
             }, 300);
         });
 
-        // Handle touch events (mobile)
         let touchStartY = 0;
         let touchEndY = 0;
         
@@ -322,7 +101,7 @@
             touchEndY = e.changedTouches[0].clientY;
             const touchDiff = touchStartY - touchEndY;
             
-            if (Math.abs(touchDiff) > 50) { // Minimum swipe distance
+            if (Math.abs(touchDiff) > 50) {
                 if (touchDiff > 0) {
                     nextScreen();
                 } else {
@@ -337,7 +116,6 @@
             }
         });
 
-        // Handle keyboard navigation
         document.addEventListener('keydown', (e) => {
             if (isScrolling) return;
             
@@ -358,11 +136,10 @@
                 clearTimeout(scrollTimeout);
                 scrollTimeout = setTimeout(() => {
                     isScrolling = false;
-                }, 800);
+                }, 300);
             }
         });
 
-        // Initialize
         updateScreens();
     </script>
 </body>
