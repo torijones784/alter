@@ -102,26 +102,26 @@
             
             staticContent.classList.add('visible');
             
-            // Set up intersection observer to remove flip section when hero top reaches viewport top
-            const heroSection = document.querySelector('.hero-section');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting && entry.boundingClientRect.top <= 0) {
-                        container.remove();
-                        document.body.style.height = 'auto';
-                        document.body.style.minHeight = '100vh';
-                        
-                        // Reset scroll position to top
-                        window.scrollTo(0, 0);
-                        
-                        observer.disconnect();
-                    }
-                });
-            }, {
-                threshold: 0
-            });
+            // Use scroll event to detect when user has scrolled past the flip section
+            function checkScrollPosition() {
+                const heroSection = document.querySelector('.hero-section');
+                const heroRect = heroSection.getBoundingClientRect();
+                
+                // When hero top is at or above the viewport top
+                if (heroRect.top <= 0) {
+                    container.remove();
+                    document.body.style.height = 'auto';
+                    document.body.style.minHeight = '100vh';
+                    
+                    // Reset scroll position to top
+                    window.scrollTo(0, 0);
+                    
+                    // Remove the scroll listener
+                    window.removeEventListener('scroll', checkScrollPosition);
+                }
+            }
             
-            observer.observe(heroSection);
+            window.addEventListener('scroll', checkScrollPosition);
         }
 
         function prevScreen() {
