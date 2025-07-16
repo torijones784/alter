@@ -102,11 +102,11 @@
             
             staticContent.classList.add('visible');
             
-            // Set up intersection observer to remove flip section when hero is fully visible
+            // Set up intersection observer to remove flip section when hero top reaches viewport top
             const heroSection = document.querySelector('.hero-section');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting && entry.intersectionRatio >= 1.0) {
+                    if (entry.isIntersecting && entry.boundingClientRect.top <= 0) {
                         container.remove();
                         document.body.style.height = 'auto';
                         document.body.style.minHeight = '100vh';
@@ -118,7 +118,7 @@
                     }
                 });
             }, {
-                threshold: 1.0
+                threshold: 0
             });
             
             observer.observe(heroSection);
