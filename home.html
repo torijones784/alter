@@ -33,7 +33,31 @@
         
         <div class="screen screen-5 next">
             <h1>Then this is for you</h1>
+            <div class="continue-indicator">Continue ↓</div>
         </div>
+    </div>
+
+    <div class="static-content">
+        <section class="hero-section">
+            <div class="hero-left">
+                <h1>Your AI Chats Won't Save You</h1>
+            </div>
+            <div class="hero-right">
+                <div class="pattern"></div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="content-container">
+                <p>In all seriousness, this is for women who are ready to build passionate, scalable businesses that allow them to live lives of joy and capacity. For too long, building a business meant figuring it out on your own or losing equity in your business to "ensure" success.</p>
+            </div>
+        </section>
+
+        <section class="alter-section">
+            <div class="content-container">
+                <h2>Bring in Alter</h2>
+            </div>
+        </section>
     </div>
 
     <script>
@@ -62,6 +86,12 @@
             if (currentScreen < totalScreens - 1) {
                 currentScreen++;
                 updateScreens();
+                
+                if (currentScreen === totalScreens - 1) {
+                    setTimeout(() => {
+                        document.body.style.overflowY = 'auto';
+                    }, 1000);
+                }
             }
         }
 
@@ -74,6 +104,11 @@
 
         document.addEventListener('wheel', (e) => {
             if (isScrolling) return;
+            
+            if (currentScreen === totalScreens - 1) {
+                document.body.style.overflowY = 'auto';
+                return;
+            }
             
             if (e.deltaY > 0) {
                 nextScreen();
