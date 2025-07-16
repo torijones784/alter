@@ -106,15 +106,19 @@
             const heroSection = document.querySelector('.hero-section');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting && entry.intersectionRatio >= 0.9) {
+                    if (entry.isIntersecting && entry.intersectionRatio >= 1.0) {
                         container.remove();
                         document.body.style.height = 'auto';
                         document.body.style.minHeight = '100vh';
+                        
+                        // Reset scroll position to top
+                        window.scrollTo(0, 0);
+                        
                         observer.disconnect();
                     }
                 });
             }, {
-                threshold: 0.9
+                threshold: 1.0
             });
             
             observer.observe(heroSection);
