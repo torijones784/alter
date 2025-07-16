@@ -123,7 +123,10 @@ body {
 }
 
 .static-content {
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     z-index: 10;
     transform: translateY(100vh);
     transition: transform 0.8s ease-out;
@@ -131,12 +134,7 @@ body {
 
 .static-content.visible {
     transform: translateY(0);
-}
-
-.container.hidden {
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.8s ease-out;
+    position: relative;
 }
 
 .hero-section {

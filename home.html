@@ -103,7 +103,9 @@
             staticContent.classList.add('visible');
             
             setTimeout(() => {
-                container.classList.add('hidden');
+                container.remove();
+                document.body.style.height = 'auto';
+                document.body.style.minHeight = '100vh';
             }, 800);
         }
 
