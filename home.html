@@ -102,11 +102,22 @@
             
             staticContent.classList.add('visible');
             
-            setTimeout(() => {
-                container.remove();
-                document.body.style.height = 'auto';
-                document.body.style.minHeight = '100vh';
-            }, 800);
+            // Set up intersection observer to remove flip section when hero is fully visible
+            const heroSection = document.querySelector('.hero-section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && entry.intersectionRatio >= 0.9) {
+                        container.remove();
+                        document.body.style.height = 'auto';
+                        document.body.style.minHeight = '100vh';
+                        observer.disconnect();
+                    }
+                });
+            }, {
+                threshold: 0.9
+            });
+            
+            observer.observe(heroSection);
         }
 
         function prevScreen() {
