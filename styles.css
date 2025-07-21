@@ -183,15 +183,20 @@ body {
     transform: translate(-50%, -50%);
     z-index: 2;
     text-align: center;
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 .hero-content h1 {
-    font-size: clamp(3rem, 8vw, 6rem);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
     font-weight: 600;
     line-height: 1.1;
-    color: #f7374f;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-    max-width: 600px;
+    color: #2c2c2c;
+    text-shadow: none;
+    max-width: 500px;
+    margin: 0;
 }: 66.666%;
     display: flex;
     align-items: center;
