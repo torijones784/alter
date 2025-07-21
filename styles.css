@@ -339,126 +339,136 @@ body {
     opacity: 1;
 }
 
-/* Initial scattered positions throughout the section */
+/* Initial scattered positions - much more spread out and random */
 .tile:nth-child(1) {
-    top: 10%;
-    left: 70%;
+    top: 8%;
+    left: 85%;
     background: linear-gradient(145deg, #f7374f, #e02d42);
-    transform: rotate(45deg) scale(0.8);
+    transform: rotate(125deg) scale(0.6);
 }
 
 .tile:nth-child(2) {
-    top: 25%;
-    left: 20%;
+    top: 22%;
+    left: 5%;
     background: linear-gradient(145deg, #88304e, #752841);
-    transform: rotate(-30deg) scale(0.9);
+    transform: rotate(-75deg) scale(0.8);
 }
 
 .tile:nth-child(3) {
-    top: 40%;
-    left: 60%;
+    top: 45%;
+    left: 90%;
     background: linear-gradient(145deg, #522546, #441f3a);
-    transform: rotate(60deg) scale(0.7);
+    transform: rotate(200deg) scale(0.5);
 }
 
 .tile:nth-child(4) {
-    top: 55%;
-    left: 15%;
+    top: 35%;
+    left: 2%;
     background: linear-gradient(145deg, #2c2c2c, #1a1a1a);
-    transform: rotate(-45deg) scale(0.85);
+    transform: rotate(-120deg) scale(0.7);
 }
 
 .tile:nth-child(5) {
-    top: 70%;
-    right: 10%;
+    top: 65%;
+    right: 3%;
     background: linear-gradient(145deg, #f7374f, #e02d42);
-    transform: rotate(25deg) scale(0.75);
+    transform: rotate(80deg) scale(0.9);
 }
 
 .tile:nth-child(6) {
-    top: 85%;
-    left: 50%;
+    top: 78%;
+    left: 8%;
     background: linear-gradient(145deg, #88304e, #752841);
-    transform: rotate(-60deg) scale(0.9);
+    transform: rotate(-160deg) scale(0.6);
 }
 
 .tile:nth-child(7) {
-    top: 45%;
-    left: 80%;
+    top: 15%;
+    left: 92%;
     background: linear-gradient(145deg, #522546, #441f3a);
-    transform: rotate(40deg) scale(0.8);
+    transform: rotate(95deg) scale(0.75);
 }
 
 .tile:nth-child(8) {
-    top: 75%;
-    right: 25%;
+    top: 88%;
+    right: 5%;
     background: linear-gradient(145deg, #2c2c2c, #1a1a1a);
-    transform: rotate(-20deg) scale(0.85);
+    transform: rotate(-45deg) scale(0.55);
 }
 
 .tile:nth-child(9) {
-    top: 30%;
-    left: 40%;
+    top: 52%;
+    left: 1%;
     background: linear-gradient(145deg, #f7374f, #e02d42);
-    transform: rotate(50deg) scale(0.7);
+    transform: rotate(150deg) scale(0.85);
 }
 
 .tile:nth-child(10) {
-    top: 60%;
-    right: 40%;
+    top: 95%;
+    left: 95%;
     background: linear-gradient(145deg, #88304e, #752841);
-    transform: rotate(-35deg) scale(0.9);
+    transform: rotate(-90deg) scale(0.65);
 }
 
-/* Line formation positions - creating a path that winds through */
+/* Line formation positions - straight down the center in a connected path */
 .tile:nth-child(1).forming-line {
     top: 5%;
-    left: 10%;
+    left: 50%;
+    transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(2).forming-line {
     top: 15%;
-    left: 25%;
+    left: 50%;
+    transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(3).forming-line {
-    top: 12%;
-    left: 45%;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(4).forming-line {
-    top: 20%;
-    right: 20%;
+    top: 35%;
+    left: 50%;
+    transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(5).forming-line {
-    top: 35%;
-    right: 10%;
+    top: 45%;
+    left: 50%;
+    transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(6).forming-line {
-    top: 50%;
-    right: 25%;
+    top: 55%;
+    left: 50%;
+    transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(7).forming-line {
     top: 65%;
-    left: 60%;
+    left: 50%;
+    transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(8).forming-line {
     top: 75%;
-    left: 35%;
+    left: 50%;
+    transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(9).forming-line {
     top: 85%;
-    left: 15%;
+    left: 50%;
+    transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(10).forming-line {
-    top: 80%;
+    top: 95%;
     left: 50%;
+    transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 @media (max-width: 480px) {
