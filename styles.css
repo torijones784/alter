@@ -410,9 +410,9 @@ body {
     transform: rotate(-90deg) scale(0.65);
 }
 
-/* Line formation positions - straight down the center in a connected path */
+/* Line formation positions - straight down the center in a tightly connected path */
 .tile:nth-child(1).forming-line {
-    top: 5%;
+    top: 8%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
@@ -424,49 +424,49 @@ body {
 }
 
 .tile:nth-child(3).forming-line {
-    top: 25%;
+    top: 22%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(4).forming-line {
-    top: 35%;
+    top: 29%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(5).forming-line {
-    top: 45%;
+    top: 36%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(6).forming-line {
-    top: 55%;
+    top: 43%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(7).forming-line {
-    top: 65%;
+    top: 50%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(8).forming-line {
-    top: 75%;
+    top: 57%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(9).forming-line {
-    top: 85%;
+    top: 64%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(10).forming-line {
-    top: 95%;
+    top: 71%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
