@@ -277,7 +277,7 @@ body {
 }
 
 .gameboard-section {
-    min-height: 400vh;
+    min-height: 200vh;
     background: linear-gradient(135deg, #f7f5f0 0%, #e8e2d5 100%);
     padding: 50px 20px;
     position: relative;
@@ -288,7 +288,7 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     position: relative;
-    height: 350vh;
+    height: 150vh;
 }
 
 .tile {
@@ -410,63 +410,63 @@ body {
     transform: rotate(-90deg) scale(0.65);
 }
 
-/* Line formation positions - straight down the center in a tightly connected path */
+/* Line formation positions - starting lower in the viewport for better visual positioning */
 .tile:nth-child(1).forming-line {
-    top: 8%;
+    top: 35%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(2).forming-line {
-    top: 15%;
+    top: 42%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(3).forming-line {
-    top: 22%;
+    top: 49%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(4).forming-line {
-    top: 29%;
+    top: 56%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(5).forming-line {
-    top: 36%;
+    top: 63%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(6).forming-line {
-    top: 43%;
+    top: 70%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(7).forming-line {
-    top: 50%;
+    top: 77%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(8).forming-line {
-    top: 57%;
+    top: 84%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(9).forming-line {
-    top: 64%;
+    top: 91%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(10).forming-line {
-    top: 71%;
+    top: 98%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
@@ -533,6 +533,6 @@ body {
     }
     
     .gameboard-section {
-        min-height: 250vh;
+        min-height: 180vh;
     }
 }
