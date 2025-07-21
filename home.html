@@ -241,19 +241,47 @@
             rootMargin: '0px 0px -50px 0px'
         };
 
-        const tileObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.classList.add('visible');
-                    }, entry.target.dataset.delay || 0);
-                }
-            });
-        }, observerOptions);
+        // Gameboard scroll animation
+        const gameboardSection = document.querySelector('.gameboard-section');
+        const tiles = document.querySelectorAll('.tile');
+
+        function handleGameboardScroll() {
+            if (!gameboardSection) return;
+            
+            const rect = gameboardSection.getBoundingClientRect();
+            const sectionHeight = gameboardSection.offsetHeight;
+            const windowHeight = window.innerHeight;
+            
+            // Calculate scroll progress through the gameboard section
+            const scrollProgress = Math.max(0, Math.min(1, 
+                (windowHeight - rect.top) / (sectionHeight + windowHeight)
+            ));
+            
+            // Start forming line when 30% through the section
+            if (scrollProgress > 0.3) {
+                tiles.forEach((tile, index) => {
+                    // Stagger the line formation
+                    const tileProgress = Math.max(0, Math.min(1, 
+                        (scrollProgress - 0.3 - (index * 0.05)) / 0.4
+                    ));
+                    
+                    if (tileProgress > 0) {
+                        tile.classList.add('forming-line');
+                    }
+                });
+            } else {
+                // Reset to scattered state
+                tiles.forEach(tile => {
+                    tile.classList.remove('forming-line');
+                });
+            }
+        }
+
+        // Add scroll listener for gameboard effect
+        window.addEventListener('scroll', handleGameboardScroll);
 
         document.querySelectorAll('.tile').forEach((tile, index) => {
             tile.dataset.delay = index * 200;
-            tileObserver.observe(tile);
         });
 
         updateScreens();

@@ -277,7 +277,7 @@ body {
 }
 
 .gameboard-section {
-    min-height: 200vh;
+    min-height: 300vh;
     background: linear-gradient(135deg, #f7f5f0 0%, #e8e2d5 100%);
     padding: 100px 20px;
     position: relative;
@@ -288,15 +288,15 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     position: relative;
-    height: 150vh;
+    height: 200vh;
 }
 
 .tile {
     position: absolute;
-    width: 180px;
-    height: 180px;
+    width: 120px;
+    height: 120px;
     background: linear-gradient(145deg, #f7374f, #e02d42);
-    border-radius: 20px;
+    border-radius: 15px;
     box-shadow: 
         0 10px 30px rgba(0, 0, 0, 0.2),
         inset 0 2px 10px rgba(255, 255, 255, 0.3),
@@ -304,22 +304,20 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    transform: translateY(100px) scale(0.8) rotateX(15deg);
-    opacity: 0;
-    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     perspective: 1000px;
     cursor: pointer;
-}
-
-.tile.visible {
-    transform: translateY(0) scale(1) rotateX(0deg);
     opacity: 1;
 }
 
+.tile.forming-line {
+    transform: scale(1) rotate(0deg);
+}
+
 .tile:hover {
-    transform: translateY(-5px) scale(1.05) rotateX(5deg);
+    transform: scale(1.05) !important;
     box-shadow: 
-        0 20px 40px rgba(0, 0, 0, 0.3),
+        0 15px 35px rgba(0, 0, 0, 0.3),
         inset 0 2px 10px rgba(255, 255, 255, 0.4),
         inset 0 -2px 10px rgba(0, 0, 0, 0.1);
 }
@@ -327,81 +325,139 @@ body {
 .tile-text {
     color: #f7f5f0;
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     text-align: center;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    padding: 10px;
-    line-height: 1.2;
+    padding: 8px;
+    line-height: 1.1;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
 }
 
+.tile.forming-line .tile-text {
+    opacity: 1;
+}
+
+/* Initial scattered positions */
 .tile:nth-child(1) {
-    top: 0%;
-    left: 10%;
+    top: 15%;
+    left: 80%;
     background: linear-gradient(145deg, #f7374f, #e02d42);
-    animation-delay: 0.1s;
+    transform: rotate(45deg) scale(0.8);
 }
 
 .tile:nth-child(2) {
-    top: 15%;
-    left: 35%;
+    top: 5%;
+    left: 20%;
     background: linear-gradient(145deg, #88304e, #752841);
-    animation-delay: 0.2s;
+    transform: rotate(-30deg) scale(0.9);
 }
 
 .tile:nth-child(3) {
-    top: 8%;
-    left: 65%;
+    top: 25%;
+    left: 50%;
     background: linear-gradient(145deg, #522546, #441f3a);
-    animation-delay: 0.3s;
+    transform: rotate(60deg) scale(0.7);
 }
 
 .tile:nth-child(4) {
-    top: 25%;
-    right: 5%;
+    top: 40%;
+    left: 10%;
     background: linear-gradient(145deg, #2c2c2c, #1a1a1a);
-    animation-delay: 0.4s;
+    transform: rotate(-45deg) scale(0.85);
 }
 
 .tile:nth-child(5) {
-    top: 45%;
-    right: 20%;
+    top: 35%;
+    right: 5%;
     background: linear-gradient(145deg, #f7374f, #e02d42);
-    animation-delay: 0.5s;
+    transform: rotate(25deg) scale(0.75);
 }
 
 .tile:nth-child(6) {
-    top: 60%;
-    left: 50%;
+    top: 55%;
+    left: 70%;
     background: linear-gradient(145deg, #88304e, #752841);
-    animation-delay: 0.6s;
+    transform: rotate(-60deg) scale(0.9);
 }
 
 .tile:nth-child(7) {
-    top: 75%;
-    left: 20%;
+    top: 70%;
+    left: 25%;
     background: linear-gradient(145deg, #522546, #441f3a);
-    animation-delay: 0.7s;
+    transform: rotate(40deg) scale(0.8);
 }
 
 .tile:nth-child(8) {
-    top: 85%;
-    left: 45%;
+    top: 80%;
+    right: 20%;
     background: linear-gradient(145deg, #2c2c2c, #1a1a1a);
-    animation-delay: 0.8s;
+    transform: rotate(-20deg) scale(0.85);
 }
 
 .tile:nth-child(9) {
-    top: 95%;
-    right: 15%;
+    top: 90%;
+    left: 45%;
     background: linear-gradient(145deg, #f7374f, #e02d42);
-    animation-delay: 0.9s;
+    transform: rotate(50deg) scale(0.7);
 }
 
 .tile:nth-child(10) {
-    top: 110%;
-    right: 40%;
+    top: 95%;
+    right: 10%;
     background: linear-gradient(145deg, #88304e, #752841);
-    animation-delay: 1.0s;
+    transform: rotate(-35deg) scale(0.9);
+}
+
+/* Final line positions */
+.tile:nth-child(1).forming-line {
+    top: 5%;
+    left: 10%;
+}
+
+.tile:nth-child(2).forming-line {
+    top: 15%;
+    left: 25%;
+}
+
+.tile:nth-child(3).forming-line {
+    top: 10%;
+    left: 45%;
+}
+
+.tile:nth-child(4).forming-line {
+    top: 20%;
+    right: 20%;
+}
+
+.tile:nth-child(5).forming-line {
+    top: 35%;
+    right: 10%;
+}
+
+.tile:nth-child(6).forming-line {
+    top: 50%;
+    right: 25%;
+}
+
+.tile:nth-child(7).forming-line {
+    top: 65%;
+    left: 60%;
+}
+
+.tile:nth-child(8).forming-line {
+    top: 75%;
+    left: 35%;
+}
+
+.tile:nth-child(9).forming-line {
+    top: 85%;
+    left: 15%;
+}
+
+.tile:nth-child(10).forming-line {
+    top: 95%;
+    left: 40%;
 }
 
 @media (max-width: 480px) {
@@ -452,15 +508,20 @@ body {
     }
     
     .tile {
-        width: 140px;
-        height: 140px;
+        width: 100px;
+        height: 100px;
     }
     
     .tile-text {
-        font-size: 0.9rem;
+        font-size: 0.8rem;
+        padding: 5px;
     }
     
     .trail-container {
-        height: 120vh;
+        height: 150vh;
+    }
+    
+    .gameboard-section {
+        min-height: 250vh;
     }
 }
