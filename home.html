@@ -252,33 +252,29 @@
             const sectionHeight = gameboardSection.offsetHeight;
             const windowHeight = window.innerHeight;
             
-            // Calculate scroll progress through the gameboard section
-            const scrollProgress = Math.max(0, Math.min(1, 
-                (windowHeight - rect.top) / (sectionHeight + windowHeight)
-            ));
+            // Calculate how far we've scrolled into the section
+            const scrollIntoSection = Math.max(0, -rect.top);
+            const totalScrollableDistance = sectionHeight - windowHeight;
+            const scrollProgress = Math.min(1, scrollIntoSection / totalScrollableDistance);
             
-            // Start forming line when 30% through the section
-            if (scrollProgress > 0.3) {
-                tiles.forEach((tile, index) => {
-                    // Stagger the line formation
-                    const tileProgress = Math.max(0, Math.min(1, 
-                        (scrollProgress - 0.3 - (index * 0.05)) / 0.4
-                    ));
-                    
-                    if (tileProgress > 0) {
-                        tile.classList.add('forming-line');
-                    }
-                });
-            } else {
-                // Reset to scattered state
-                tiles.forEach(tile => {
+            // Calculate how many tiles should be connected based on scroll progress
+            const totalTiles = tiles.length;
+            const tilesConnected = Math.floor(scrollProgress * (totalTiles + 2)); // +2 for smoother progression
+            
+            tiles.forEach((tile, index) => {
+                if (index < tilesConnected) {
+                    tile.classList.add('forming-line');
+                } else {
                     tile.classList.remove('forming-line');
-                });
-            }
+                }
+            });
         }
 
         // Add scroll listener for gameboard effect
         window.addEventListener('scroll', handleGameboardScroll);
+        
+        // Initial call to set up the effect
+        handleGameboardScroll();
 
         document.querySelectorAll('.tile').forEach((tile, index) => {
             tile.dataset.delay = index * 200;
