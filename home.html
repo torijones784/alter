@@ -257,19 +257,30 @@
             if (sectionTop < windowHeight && sectionTop + sectionHeight > 0) {
                 // Calculate how far we've scrolled into the section
                 const scrollIntoSection = Math.max(0, windowHeight - sectionTop);
-                const scrollProgress = Math.min(1, scrollIntoSection / (sectionHeight * 0.7));
+                const scrollProgress = scrollIntoSection / sectionHeight;
                 
-                // Calculate how many tiles should be connected
-                const totalTiles = tiles.length;
-                const tilesConnected = Math.floor(scrollProgress * totalTiles);
-                
-                tiles.forEach((tile, index) => {
-                    if (index < tilesConnected) {
-                        tile.classList.add('forming-line');
-                    } else {
+                // Only start animation after 40% through the section
+                if (scrollProgress > 0.4) {
+                    // Calculate animation progress from 40% to 100%
+                    const animationProgress = Math.min(1, (scrollProgress - 0.4) / 0.6);
+                    
+                    // Calculate how many tiles should be connected
+                    const totalTiles = tiles.length;
+                    const tilesConnected = Math.floor(animationProgress * totalTiles);
+                    
+                    tiles.forEach((tile, index) => {
+                        if (index < tilesConnected) {
+                            tile.classList.add('forming-line');
+                        } else {
+                            tile.classList.remove('forming-line');
+                        }
+                    });
+                } else {
+                    // Keep all tiles scattered if we haven't reached 40% yet
+                    tiles.forEach(tile => {
                         tile.classList.remove('forming-line');
-                    }
-                });
+                    });
+                }
             } else {
                 // Reset all tiles if we're outside the section
                 tiles.forEach(tile => {

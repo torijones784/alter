@@ -339,72 +339,72 @@ body {
     opacity: 1;
 }
 
-/* Initial scattered positions - much more spread out and random */
+/* Initial scattered positions - moved up to be visible earlier in the section */
 .tile:nth-child(1) {
-    top: 8%;
+    top: 2%;
     left: 85%;
     background: linear-gradient(145deg, #f7374f, #e02d42);
     transform: rotate(125deg) scale(0.6);
 }
 
 .tile:nth-child(2) {
-    top: 22%;
+    top: 8%;
     left: 5%;
     background: linear-gradient(145deg, #88304e, #752841);
     transform: rotate(-75deg) scale(0.8);
 }
 
 .tile:nth-child(3) {
-    top: 45%;
+    top: 18%;
     left: 90%;
     background: linear-gradient(145deg, #522546, #441f3a);
     transform: rotate(200deg) scale(0.5);
 }
 
 .tile:nth-child(4) {
-    top: 35%;
+    top: 12%;
     left: 2%;
     background: linear-gradient(145deg, #2c2c2c, #1a1a1a);
     transform: rotate(-120deg) scale(0.7);
 }
 
 .tile:nth-child(5) {
-    top: 65%;
+    top: 25%;
     right: 3%;
     background: linear-gradient(145deg, #f7374f, #e02d42);
     transform: rotate(80deg) scale(0.9);
 }
 
 .tile:nth-child(6) {
-    top: 78%;
+    top: 32%;
     left: 8%;
     background: linear-gradient(145deg, #88304e, #752841);
     transform: rotate(-160deg) scale(0.6);
 }
 
 .tile:nth-child(7) {
-    top: 15%;
+    top: 5%;
     left: 92%;
     background: linear-gradient(145deg, #522546, #441f3a);
     transform: rotate(95deg) scale(0.75);
 }
 
 .tile:nth-child(8) {
-    top: 88%;
+    top: 38%;
     right: 5%;
     background: linear-gradient(145deg, #2c2c2c, #1a1a1a);
     transform: rotate(-45deg) scale(0.55);
 }
 
 .tile:nth-child(9) {
-    top: 52%;
+    top: 22%;
     left: 1%;
     background: linear-gradient(145deg, #f7374f, #e02d42);
     transform: rotate(150deg) scale(0.85);
 }
 
 .tile:nth-child(10) {
-    top: 95%;
+    top: 42%;
     left: 95%;
     background: linear-gradient(145deg, #88304e, #752841);
     transform: rotate(-90deg) scale(0.65);
