@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Flip Experience</title>
+    <title>Alter | For Women Who Are Ready</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap" rel="stylesheet">
@@ -44,9 +44,38 @@
             </div>
         </section>
 
-        <section class="content-section">
-            <div class="content-container">
-                <p>In all seriousness, this is for women who are ready to build passionate, scalable businesses that allow them to live lives of joy and capacity. For too long, building a business meant figuring it out on your own or losing equity in your business to "ensure" success.</p>
+        <section class="gameboard-section">
+            <div class="trail-container">
+                <div class="tile" data-content="Start Your Journey">
+                    <span class="tile-text">Start Your Journey</span>
+                </div>
+                <div class="tile" data-content="Define Your Vision">
+                    <span class="tile-text">Define Your Vision</span>
+                </div>
+                <div class="tile" data-content="Build Your Strategy">
+                    <span class="tile-text">Build Your Strategy</span>
+                </div>
+                <div class="tile" data-content="Launch With Confidence">
+                    <span class="tile-text">Launch With Confidence</span>
+                </div>
+                <div class="tile" data-content="Scale Your Impact">
+                    <span class="tile-text">Scale Your Impact</span>
+                </div>
+                <div class="tile" data-content="Master Your Market">
+                    <span class="tile-text">Master Your Market</span>
+                </div>
+                <div class="tile" data-content="Build Your Team">
+                    <span class="tile-text">Build Your Team</span>
+                </div>
+                <div class="tile" data-content="Expand Your Reach">
+                    <span class="tile-text">Expand Your Reach</span>
+                </div>
+                <div class="tile" data-content="Financial Freedom">
+                    <span class="tile-text">Financial Freedom</span>
+                </div>
+                <div class="tile" data-content="Live Your Dreams">
+                    <span class="tile-text">Live Your Dreams</span>
+                </div>
             </div>
         </section>
 
@@ -99,21 +128,17 @@
             
             staticContent.classList.add('visible');
             
-            // Use scroll event to detect when user has scrolled past the flip section
             function checkScrollPosition() {
                 const heroSection = document.querySelector('.hero-section');
                 const heroRect = heroSection.getBoundingClientRect();
                 
-                // When hero top is at or above the viewport top
                 if (heroRect.top <= 0) {
                     container.remove();
                     document.body.style.height = 'auto';
                     document.body.style.minHeight = '100vh';
                     
-                    // Reset scroll position to top
                     window.scrollTo(0, 0);
                     
-                    // Remove the scroll listener
                     window.removeEventListener('scroll', checkScrollPosition);
                 }
             }
@@ -211,7 +236,6 @@
             });
         }
 
-        // Gameboard tile animation
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -227,9 +251,8 @@
             });
         }, observerOptions);
 
-        // Observe all tiles
         document.querySelectorAll('.tile').forEach((tile, index) => {
-            tile.dataset.delay = index * 200; // Stagger the animations
+            tile.dataset.delay = index * 200;
             tileObserver.observe(tile);
         });
 

@@ -264,6 +264,11 @@ body {
     padding: 80px 20px;
 }
 
+.content-container {
+    max-width: 800px;
+    text-align: center;
+}
+
 .alter-section h2 {
     font-size: clamp(4rem, 10vw, 8rem);
     font-weight: 600;
@@ -440,10 +445,6 @@ body {
         transform: none;
         margin: 20px auto;
         max-width: 90%;
-    }
-    
-    .content-section p {
-        font-size: clamp(1.2rem, 5vw, 1.8rem);
     }
     
     .alter-section h2 {
