@@ -211,6 +211,28 @@
             });
         }
 
+        // Gameboard tile animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const tileObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, entry.target.dataset.delay || 0);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all tiles
+        document.querySelectorAll('.tile').forEach((tile, index) => {
+            tile.dataset.delay = index * 200; // Stagger the animations
+            tileObserver.observe(tile);
+        });
+
         updateScreens();
     </script>
 </body>
