@@ -279,20 +279,16 @@ body {
 .gameboard-section {
     min-height: 400vh;
     background: linear-gradient(135deg, #f7f5f0 0%, #e8e2d5 100%);
-    padding: 0;
+    padding: 50px 20px;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .trail-container {
-    position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100vw;
-    height: 100vh;
     max-width: 1200px;
-    pointer-events: none;
+    margin: 0 auto;
+    position: relative;
+    height: 350vh;
 }
 
 .tile {
@@ -312,7 +308,6 @@ body {
     perspective: 1000px;
     cursor: pointer;
     opacity: 1;
-    pointer-events: auto;
 }
 
 .tile.forming-line {
@@ -344,105 +339,105 @@ body {
     opacity: 1;
 }
 
-/* Initial scattered positions - within viewport */
+/* Initial scattered positions throughout the section */
 .tile:nth-child(1) {
-    top: 20%;
+    top: 10%;
     left: 70%;
     background: linear-gradient(145deg, #f7374f, #e02d42);
     transform: rotate(45deg) scale(0.8);
 }
 
 .tile:nth-child(2) {
-    top: 60%;
+    top: 25%;
     left: 20%;
     background: linear-gradient(145deg, #88304e, #752841);
     transform: rotate(-30deg) scale(0.9);
 }
 
 .tile:nth-child(3) {
-    top: 80%;
+    top: 40%;
     left: 60%;
     background: linear-gradient(145deg, #522546, #441f3a);
     transform: rotate(60deg) scale(0.7);
 }
 
 .tile:nth-child(4) {
-    top: 30%;
+    top: 55%;
     left: 15%;
     background: linear-gradient(145deg, #2c2c2c, #1a1a1a);
     transform: rotate(-45deg) scale(0.85);
 }
 
 .tile:nth-child(5) {
-    top: 10%;
+    top: 70%;
     right: 10%;
     background: linear-gradient(145deg, #f7374f, #e02d42);
     transform: rotate(25deg) scale(0.75);
 }
 
 .tile:nth-child(6) {
-    top: 70%;
+    top: 85%;
     left: 50%;
     background: linear-gradient(145deg, #88304e, #752841);
     transform: rotate(-60deg) scale(0.9);
 }
 
 .tile:nth-child(7) {
-    top: 40%;
+    top: 45%;
     left: 80%;
     background: linear-gradient(145deg, #522546, #441f3a);
     transform: rotate(40deg) scale(0.8);
 }
 
 .tile:nth-child(8) {
-    top: 90%;
+    top: 75%;
     right: 25%;
     background: linear-gradient(145deg, #2c2c2c, #1a1a1a);
     transform: rotate(-20deg) scale(0.85);
 }
 
 .tile:nth-child(9) {
-    top: 50%;
+    top: 30%;
     left: 40%;
     background: linear-gradient(145deg, #f7374f, #e02d42);
     transform: rotate(50deg) scale(0.7);
 }
 
 .tile:nth-child(10) {
-    top: 15%;
+    top: 60%;
     right: 40%;
     background: linear-gradient(145deg, #88304e, #752841);
     transform: rotate(-35deg) scale(0.9);
 }
 
-/* Target positions for the winding line - always within viewport */
+/* Line formation positions - creating a path that winds through */
 .tile:nth-child(1).forming-line {
-    top: 10%;
+    top: 5%;
     left: 10%;
 }
 
 .tile:nth-child(2).forming-line {
-    top: 20%;
+    top: 15%;
     left: 25%;
 }
 
 .tile:nth-child(3).forming-line {
-    top: 15%;
+    top: 12%;
     left: 45%;
 }
 
 .tile:nth-child(4).forming-line {
-    top: 25%;
+    top: 20%;
     right: 20%;
 }
 
 .tile:nth-child(5).forming-line {
-    top: 40%;
+    top: 35%;
     right: 10%;
 }
 
 .tile:nth-child(6).forming-line {
-    top: 55%;
+    top: 50%;
     right: 25%;
 }
 

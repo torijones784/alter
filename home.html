@@ -242,32 +242,40 @@
         };
 
         // Gameboard scroll animation
-        const gameboardSection = document.querySelector('.gameboard-section');
-        const tiles = document.querySelectorAll('.tile');
-
         function handleGameboardScroll() {
+            const gameboardSection = document.querySelector('.gameboard-section');
+            const tiles = document.querySelectorAll('.tile');
+            
             if (!gameboardSection) return;
             
             const rect = gameboardSection.getBoundingClientRect();
-            const sectionHeight = gameboardSection.offsetHeight;
+            const sectionTop = rect.top;
+            const sectionHeight = rect.height;
             const windowHeight = window.innerHeight;
             
-            // Calculate how far we've scrolled into the section
-            const scrollIntoSection = Math.max(0, -rect.top);
-            const totalScrollableDistance = sectionHeight - windowHeight;
-            const scrollProgress = Math.min(1, scrollIntoSection / totalScrollableDistance);
-            
-            // Calculate how many tiles should be connected based on scroll progress
-            const totalTiles = tiles.length;
-            const tilesConnected = Math.floor(scrollProgress * (totalTiles + 2)); // +2 for smoother progression
-            
-            tiles.forEach((tile, index) => {
-                if (index < tilesConnected) {
-                    tile.classList.add('forming-line');
-                } else {
+            // Check if we're in the gameboard section
+            if (sectionTop < windowHeight && sectionTop + sectionHeight > 0) {
+                // Calculate how far we've scrolled into the section
+                const scrollIntoSection = Math.max(0, windowHeight - sectionTop);
+                const scrollProgress = Math.min(1, scrollIntoSection / (sectionHeight * 0.7));
+                
+                // Calculate how many tiles should be connected
+                const totalTiles = tiles.length;
+                const tilesConnected = Math.floor(scrollProgress * totalTiles);
+                
+                tiles.forEach((tile, index) => {
+                    if (index < tilesConnected) {
+                        tile.classList.add('forming-line');
+                    } else {
+                        tile.classList.remove('forming-line');
+                    }
+                });
+            } else {
+                // Reset all tiles if we're outside the section
+                tiles.forEach(tile => {
                     tile.classList.remove('forming-line');
-                }
-            });
+                });
+            }
         }
 
         // Add scroll listener for gameboard effect
