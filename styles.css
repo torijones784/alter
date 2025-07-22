@@ -418,55 +418,55 @@ body {
 }
 
 .tile:nth-child(2).forming-line {
-    top: 42%;
+    top: 46%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(3).forming-line {
-    top: 49%;
+    top: 57%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(4).forming-line {
-    top: 56%;
+    top: 68%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(5).forming-line {
-    top: 63%;
+    top: 79%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(6).forming-line {
-    top: 70%;
+    top: 90%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(7).forming-line {
-    top: 77%;
+    top: 101%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(8).forming-line {
-    top: 84%;
+    top: 112%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(9).forming-line {
-    top: 91%;
+    top: 123%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(10).forming-line {
-    top: 98%;
+    top: 134%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
@@ -534,5 +534,89 @@ body {
     
     .gameboard-section {
         min-height: 180vh;
+    }
+    
+    /* Mobile spacing: 8% gaps */
+    .tile:nth-child(1).forming-line {
+        top: 35%;
+    }
+    
+    .tile:nth-child(2).forming-line {
+        top: 43%;
+    }
+    
+    .tile:nth-child(3).forming-line {
+        top: 51%;
+    }
+    
+    .tile:nth-child(4).forming-line {
+        top: 59%;
+    }
+    
+    .tile:nth-child(5).forming-line {
+        top: 67%;
+    }
+    
+    .tile:nth-child(6).forming-line {
+        top: 75%;
+    }
+    
+    .tile:nth-child(7).forming-line {
+        top: 83%;
+    }
+    
+    .tile:nth-child(8).forming-line {
+        top: 91%;
+    }
+    
+    .tile:nth-child(9).forming-line {
+        top: 99%;
+    }
+    
+    .tile:nth-child(10).forming-line {
+        top: 107%;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 1024px) {
+    /* Tablet/iPad spacing: 7% gaps */
+    .tile:nth-child(1).forming-line {
+        top: 35%;
+    }
+    
+    .tile:nth-child(2).forming-line {
+        top: 42%;
+    }
+    
+    .tile:nth-child(3).forming-line {
+        top: 49%;
+    }
+    
+    .tile:nth-child(4).forming-line {
+        top: 56%;
+    }
+    
+    .tile:nth-child(5).forming-line {
+        top: 63%;
+    }
+    
+    .tile:nth-child(6).forming-line {
+        top: 70%;
+    }
+    
+    .tile:nth-child(7).forming-line {
+        top: 77%;
+    }
+    
+    .tile:nth-child(8).forming-line {
+        top: 84%;
+    }
+    
+    .tile:nth-child(9).forming-line {
+        top: 91%;
+    }
+    
+    .tile:nth-child(10).forming-line {
+        top: 98%;
     }
 }
