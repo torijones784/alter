@@ -259,10 +259,10 @@
                 const scrollIntoSection = Math.max(0, windowHeight - sectionTop);
                 const scrollProgress = scrollIntoSection / sectionHeight;
                 
-                // Only start animation after 40% through the section
-                if (scrollProgress > 0.4) {
-                    // Calculate animation progress from 40% to 100%
-                    const animationProgress = Math.min(1, (scrollProgress - 0.4) / 0.6);
+                // Only start animation after 30% through the section
+                if (scrollProgress > 0.3) {
+                    // Calculate animation progress from 30% to 100%
+                    const animationProgress = Math.min(1, (scrollProgress - 0.3) / 0.7);
                     
                     // Divide the animation progress into discrete steps for each tile
                     const totalTiles = tiles.length;
@@ -282,7 +282,7 @@
                         }
                     });
                 } else {
-                    // Keep all tiles scattered if we haven't reached 40% yet
+                    // Keep all tiles scattered if we haven't reached 30% yet
                     tiles.forEach(tile => {
                         tile.classList.remove('forming-line');
                     });

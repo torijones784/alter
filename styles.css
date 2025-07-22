@@ -277,7 +277,7 @@ body {
 }
 
 .gameboard-section {
-    min-height: 280vh;
+    min-height: 200vh;
     background: linear-gradient(135deg, #f7f5f0 0%, #e8e2d5 100%);
     padding: 50px 20px;
     position: relative;
@@ -288,7 +288,7 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     position: relative;
-    height: 220vh;
+    height: 150vh;
 }
 
 .tile {
@@ -410,7 +410,7 @@ body {
     transform: rotate(-90deg) scale(0.65);
 }
 
-/* Line formation positions - starting lower in the viewport for better visual positioning */
+/* Line formation positions - starting lower in the viewport with proper gaps */
 .tile:nth-child(1).forming-line {
     top: 35%;
     left: 50%;
@@ -418,55 +418,55 @@ body {
 }
 
 .tile:nth-child(2).forming-line {
-    top: 46%;
+    top: 42%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(3).forming-line {
-    top: 57%;
+    top: 49%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(4).forming-line {
-    top: 68%;
+    top: 56%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(5).forming-line {
-    top: 79%;
+    top: 63%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(6).forming-line {
-    top: 90%;
+    top: 70%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(7).forming-line {
-    top: 101%;
+    top: 77%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(8).forming-line {
-    top: 112%;
+    top: 84%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(9).forming-line {
-    top: 123%;
+    top: 91%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(10).forming-line {
-    top: 134%;
+    top: 98%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
@@ -532,90 +532,132 @@ body {
         height: 150vh;
     }
     
-    .gameboard-section {
-        min-height: 220vh;
-    }
-    
-    /* Mobile spacing: 8% gaps */
     .tile:nth-child(1).forming-line {
         top: 35%;
     }
-    
+
     .tile:nth-child(2).forming-line {
         top: 43%;
     }
-    
+
     .tile:nth-child(3).forming-line {
         top: 51%;
     }
-    
+
     .tile:nth-child(4).forming-line {
         top: 59%;
     }
-    
+
     .tile:nth-child(5).forming-line {
         top: 67%;
     }
-    
+
     .tile:nth-child(6).forming-line {
         top: 75%;
     }
-    
+
     .tile:nth-child(7).forming-line {
         top: 83%;
     }
-    
+
     .tile:nth-child(8).forming-line {
         top: 91%;
     }
-    
+
     .tile:nth-child(9).forming-line {
         top: 99%;
     }
-    
+
     .tile:nth-child(10).forming-line {
         top: 107%;
     }
+    
+    .gameboard-section {
+        min-height: 180vh;
+    }
 }
 
-@media (min-width: 481px) and (max-width: 1024px) {
-    /* Tablet/iPad spacing: 7% gaps */
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* iPad and tablet spacing - 7% gaps */
     .tile:nth-child(1).forming-line {
         top: 35%;
     }
-    
+
     .tile:nth-child(2).forming-line {
         top: 42%;
     }
-    
+
     .tile:nth-child(3).forming-line {
         top: 49%;
     }
-    
+
     .tile:nth-child(4).forming-line {
         top: 56%;
     }
-    
+
     .tile:nth-child(5).forming-line {
         top: 63%;
     }
-    
+
     .tile:nth-child(6).forming-line {
         top: 70%;
     }
-    
+
     .tile:nth-child(7).forming-line {
         top: 77%;
     }
-    
+
     .tile:nth-child(8).forming-line {
         top: 84%;
     }
-    
+
     .tile:nth-child(9).forming-line {
         top: 91%;
     }
-    
+
+    .tile:nth-child(10).forming-line {
+        top: 98%;
+    }
+}
+
+@media (min-width: 1025px) {
+    /* Laptop and desktop spacing - 7% gaps */
+    .tile:nth-child(1).forming-line {
+        top: 35%;
+    }
+
+    .tile:nth-child(2).forming-line {
+        top: 42%;
+    }
+
+    .tile:nth-child(3).forming-line {
+        top: 49%;
+    }
+
+    .tile:nth-child(4).forming-line {
+        top: 56%;
+    }
+
+    .tile:nth-child(5).forming-line {
+        top: 63%;
+    }
+
+    .tile:nth-child(6).forming-line {
+        top: 70%;
+    }
+
+    .tile:nth-child(7).forming-line {
+        top: 77%;
+    }
+
+    .tile:nth-child(8).forming-line {
+        top: 84%;
+    }
+
+    .tile:nth-child(9).forming-line {
+        top: 91%;
+    }
+
     .tile:nth-child(10).forming-line {
         top: 98%;
     }
