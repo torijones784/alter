@@ -264,20 +264,18 @@
                     // Calculate animation progress from 40% to 100%
                     const animationProgress = Math.min(1, (scrollProgress - 0.4) / 0.6);
                     
-                    // Calculate which tile should be moving based on animation progress
+                    // Divide the animation progress into discrete steps for each tile
                     const totalTiles = tiles.length;
-                    const currentTileIndex = Math.floor(animationProgress * totalTiles);
+                    const stepSize = 1 / totalTiles;
+                    const completedTiles = Math.floor(animationProgress / stepSize);
                     
                     tiles.forEach((tile, index) => {
-                        if (index < currentTileIndex) {
-                            // Previous tiles should be fully formed
+                        if (index < completedTiles) {
+                            // Previous tiles are fully in position
                             tile.classList.add('forming-line');
-                        } else if (index === currentTileIndex) {
-                            // Current tile is moving into position
-                            const tileProgress = (animationProgress * totalTiles) - index;
-                            if (tileProgress >= 0) {
-                                tile.classList.add('forming-line');
-                            }
+                        } else if (index === completedTiles && animationProgress >= index * stepSize) {
+                            // Current tile should start moving
+                            tile.classList.add('forming-line');
                         } else {
                             // Future tiles remain scattered
                             tile.classList.remove('forming-line');
