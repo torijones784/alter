@@ -277,7 +277,7 @@ body {
 }
 
 .gameboard-section {
-    min-height: 200vh;
+    min-height: 280vh;
     background: linear-gradient(135deg, #f7f5f0 0%, #e8e2d5 100%);
     padding: 50px 20px;
     position: relative;
@@ -288,7 +288,7 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     position: relative;
-    height: 150vh;
+    height: 220vh;
 }
 
 .tile {
@@ -533,7 +533,7 @@ body {
     }
     
     .gameboard-section {
-        min-height: 180vh;
+        min-height: 220vh;
     }
     
     /* Mobile spacing: 8% gaps */
