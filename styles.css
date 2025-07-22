@@ -290,6 +290,8 @@ body {
     padding: 50px 0;
     max-width: 800px;
     margin: 0 auto;
+    position: relative;
+    z-index: 3;
 }
 
 .gameboard-intro h2 {
@@ -309,6 +311,7 @@ body {
     margin: 0 auto;
     position: relative;
     height: 150vh;
+    z-index: 1;
 }
 
 .tile {
@@ -327,16 +330,20 @@ body {
     transition: all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     perspective: 1000px;
     cursor: pointer;
-    opacity: 1;
+    opacity: 0.7;
+    z-index: 2;
 }
 
 .tile.forming-line {
     transform: scale(1) rotate(0deg);
+    opacity: 1;
+    z-index: 2;
 }
 
 .tile:hover {
     transform: scale(1.05) !important;
     z-index: 10;
+    opacity: 1;
     box-shadow: 
         0 15px 35px rgba(0, 0, 0, 0.3),
         inset 0 2px 10px rgba(255, 255, 255, 0.4),
@@ -361,71 +368,71 @@ body {
 
 /* Initial scattered positions - positioned behind the intro text */
 .tile:nth-child(1) {
-    top: 8%;
-    left: 15%;
+    top: 5%;
+    left: 20%;
     background: linear-gradient(145deg, #f7374f, #e02d42);
     transform: rotate(125deg) scale(0.6);
 }
 
 .tile:nth-child(2) {
-    top: 12%;
-    left: 85%;
+    top: 8%;
+    left: 75%;
     background: linear-gradient(145deg, #88304e, #752841);
     transform: rotate(-75deg) scale(0.8);
 }
 
 .tile:nth-child(3) {
-    top: 18%;
+    top: 15%;
     left: 10%;
     background: linear-gradient(145deg, #522546, #441f3a);
     transform: rotate(200deg) scale(0.5);
 }
 
 .tile:nth-child(4) {
-    top: 22%;
-    left: 90%;
+    top: 18%;
+    left: 85%;
     background: linear-gradient(145deg, #2c2c2c, #1a1a1a);
     transform: rotate(-120deg) scale(0.7);
 }
 
 .tile:nth-child(5) {
-    top: 28%;
-    left: 5%;
+    top: 25%;
+    left: 15%;
     background: linear-gradient(145deg, #f7374f, #e02d42);
     transform: rotate(80deg) scale(0.9);
 }
 
 .tile:nth-child(6) {
-    top: 32%;
-    left: 95%;
+    top: 28%;
+    left: 80%;
     background: linear-gradient(145deg, #88304e, #752841);
     transform: rotate(-160deg) scale(0.6);
 }
 
 .tile:nth-child(7) {
-    top: 38%;
-    left: 8%;
+    top: 35%;
+    left: 5%;
     background: linear-gradient(145deg, #522546, #441f3a);
     transform: rotate(95deg) scale(0.75);
 }
 
 .tile:nth-child(8) {
-    top: 42%;
-    left: 92%;
+    top: 38%;
+    left: 90%;
     background: linear-gradient(145deg, #2c2c2c, #1a1a1a);
     transform: rotate(-45deg) scale(0.55);
 }
 
 .tile:nth-child(9) {
-    top: 48%;
-    left: 12%;
+    top: 45%;
+    left: 25%;
     background: linear-gradient(145deg, #f7374f, #e02d42);
     transform: rotate(150deg) scale(0.85);
 }
 
 .tile:nth-child(10) {
-    top: 52%;
-    left: 88%;
+    top: 48%;
+    left: 70%;
     background: linear-gradient(145deg, #88304e, #752841);
     transform: rotate(-90deg) scale(0.65);
 }
