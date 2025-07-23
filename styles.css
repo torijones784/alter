@@ -120,6 +120,7 @@ body {
     font-size: 1.2rem;
     opacity: 0.8;
     animation: bounce 2s infinite;
+    cursor: pointer;
 }
 
 .static-content {
@@ -197,100 +198,135 @@ body {
     text-shadow: none;
     max-width: 500px;
     margin: 0;
-}: 66.666%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 40px;
 }
 
-.hero-left h1 {
-    font-size: clamp(3rem, 8vw, 6rem);
-    font-weight: 600;
-    line-height: 1.1;
-    color: #f7374f;
-    text-align: left;
-    max-width: 100%;
-}
-
-.hero-right {
-    width: 33.333%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 40px;
-}
-
-.pattern {
-    width: 100%;
-    height: 80%;
-    background: linear-gradient(45deg, #f7374f 25%, transparent 25%), 
-                linear-gradient(-45deg, #f7374f 25%, transparent 25%), 
-                linear-gradient(45deg, transparent 75%, #88304e 75%), 
-                linear-gradient(-45deg, transparent 75%, #88304e 75%);
-    background-size: 40px 40px;
-    background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
-    opacity: 0.6;
-    border-radius: 10px;
-}
-
-.content-section {
+/* Product Introduction Section */
+.product-intro-section {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     background: linear-gradient(135deg, #f7f5f0 0%, #e8e2d5 100%);
     padding: 80px 20px;
+    position: relative;
+    overflow: hidden;
 }
 
-.content-container {
-    max-width: 800px;
+.product-intro-container {
+    max-width: 1000px;
     text-align: center;
+    position: relative;
+    z-index: 2;
 }
 
-.content-section p {
+.product-intro-section h2 {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 700;
+    color: #2c2c2c;
+    margin-bottom: 30px;
+    line-height: 1.1;
+}
+
+.product-intro-section p {
     font-size: clamp(1.5rem, 4vw, 2.5rem);
     font-weight: 600;
     line-height: 1.4;
     color: #2c2c2c;
+    margin-bottom: 20px;
 }
 
-.alter-section {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #f7374f 0%, #e02d42 100%);
-    padding: 80px 20px;
+.highlight-text {
+    color: #f7374f;
+    position: relative;
 }
 
-.content-container {
-    max-width: 800px;
-    text-align: center;
+.strike-through {
+    position: relative;
+    opacity: 0;
+    animation: strikeThrough 0.8s ease-out forwards;
 }
 
-.alter-section h2 {
-    font-size: clamp(4rem, 10vw, 8rem);
-    font-weight: 600;
-    color: #f7f5f0;
-    text-align: center;
+@keyframes strikeThrough {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
+.strike-through::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 0;
+    height: 3px;
+    background: #f7374f;
+    animation: strikeAnimation 1s ease-out 0.5s forwards;
+}
+
+@keyframes strikeAnimation {
+    to {
+        width: 100%;
+    }
+}
+
+/* Gameboard Section */
 .gameboard-section {
     min-height: 200vh;
-    background: linear-gradient(135deg, #f7f5f0 0%, #e8e2d5 100%);
+    background: linear-gradient(135deg, #88304e 0%, #522546 100%);
     padding: 50px 20px;
     position: relative;
     overflow: visible;
 }
 
+/* Background tiles container */
+.tiles-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* Intro text overlay */
+.gameboard-intro {
+    text-align: center;
+    color: #f7f5f0;
+    padding: 50px 0;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 3;
+}
+
+.gameboard-intro h2 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.gameboard-intro p {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+/* Trail container for line formation */
 .trail-container {
     max-width: 1200px;
     margin: 0 auto;
     position: relative;
     height: 150vh;
+    z-index: 2;
 }
 
+/* Tile styling */
 .tile {
     position: absolute;
     width: 120px;
@@ -307,16 +343,20 @@ body {
     transition: all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     perspective: 1000px;
     cursor: pointer;
-    opacity: 1;
+    opacity: 0.7;
+    z-index: 2;
 }
 
 .tile.forming-line {
     transform: scale(1) rotate(0deg);
+    opacity: 1;
+    z-index: 2;
 }
 
 .tile:hover {
     transform: scale(1.05) !important;
     z-index: 10;
+    opacity: 1;
     box-shadow: 
         0 15px 35px rgba(0, 0, 0, 0.3),
         inset 0 2px 10px rgba(255, 255, 255, 0.4),
@@ -339,185 +379,140 @@ body {
     opacity: 1;
 }
 
-/* Initial scattered positions - moved up to be visible earlier in the section */
+/* Initial scattered positions - positioned directly behind the intro text */
 .tile:nth-child(1) {
     top: 2%;
-    left: 85%;
+    left: 20%;
     background: linear-gradient(145deg, #f7374f, #e02d42);
     transform: rotate(125deg) scale(0.6);
 }
 
 .tile:nth-child(2) {
-    top: 8%;
-    left: 5%;
+    top: 4%;
+    left: 75%;
     background: linear-gradient(145deg, #88304e, #752841);
     transform: rotate(-75deg) scale(0.8);
 }
 
 .tile:nth-child(3) {
-    top: 18%;
-    left: 90%;
+    top: 6%;
+    left: 10%;
     background: linear-gradient(145deg, #522546, #441f3a);
     transform: rotate(200deg) scale(0.5);
 }
 
 .tile:nth-child(4) {
-    top: 12%;
-    left: 2%;
+    top: 8%;
+    left: 85%;
     background: linear-gradient(145deg, #2c2c2c, #1a1a1a);
     transform: rotate(-120deg) scale(0.7);
 }
 
 .tile:nth-child(5) {
-    top: 25%;
-    right: 3%;
+    top: 10%;
+    left: 15%;
     background: linear-gradient(145deg, #f7374f, #e02d42);
     transform: rotate(80deg) scale(0.9);
 }
 
 .tile:nth-child(6) {
-    top: 32%;
-    left: 8%;
+    top: 12%;
+    left: 80%;
     background: linear-gradient(145deg, #88304e, #752841);
     transform: rotate(-160deg) scale(0.6);
 }
 
 .tile:nth-child(7) {
-    top: 5%;
-    left: 92%;
+    top: 14%;
+    left: 5%;
     background: linear-gradient(145deg, #522546, #441f3a);
     transform: rotate(95deg) scale(0.75);
 }
 
 .tile:nth-child(8) {
-    top: 38%;
-    right: 5%;
+    top: 16%;
+    left: 90%;
     background: linear-gradient(145deg, #2c2c2c, #1a1a1a);
     transform: rotate(-45deg) scale(0.55);
 }
 
 .tile:nth-child(9) {
-    top: 22%;
-    left: 1%;
+    top: 18%;
+    left: 25%;
     background: linear-gradient(145deg, #f7374f, #e02d42);
     transform: rotate(150deg) scale(0.85);
 }
 
 .tile:nth-child(10) {
-    top: 42%;
-    left: 95%;
+    top: 20%;
+    left: 70%;
     background: linear-gradient(145deg, #88304e, #752841);
     transform: rotate(-90deg) scale(0.65);
 }
 
-/* Line formation positions - starting lower in the viewport with proper gaps */
+/* Line formation positions - relative to trail-container */
 .tile:nth-child(1).forming-line {
-    top: 35%;
+    top: 65%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(2).forming-line {
-    top: 42%;
+    top: 72%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(3).forming-line {
-    top: 49%;
+    top: 79%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(4).forming-line {
-    top: 56%;
+    top: 86%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(5).forming-line {
-    top: 63%;
+    top: 93%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(6).forming-line {
-    top: 70%;
+    top: 100%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(7).forming-line {
-    top: 77%;
+    top: 107%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(8).forming-line {
-    top: 84%;
+    top: 114%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(9).forming-line {
-    top: 91%;
+    top: 121%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
 .tile:nth-child(10).forming-line {
-    top: 98%;
+    top: 128%;
     left: 50%;
     transform: translateX(-50%) scale(1) rotate(0deg);
 }
 
+/* Mobile Responsiveness */
 @media (max-width: 480px) {
-    .screen h1 {
-        font-size: clamp(2rem, 7vw, 3rem);
-    }
-    
-    .screen {
-        padding: 15px;
-    }
-    
-    .hero-section {
-        flex-direction: column;
-        height: auto;
-        min-height: 100vh;
-    }
-    
-    .hero-left, .hero-right {
-        width: 100%;
-    }
-    
-    .hero-left {
-        height: 60vh;
-        padding: 20px;
-    }
-    
-    .hero-right {
-        height: 40vh;
-        padding: 20px;
-    }
-    
-    .hero-left h1 {
-        font-size: clamp(2.5rem, 8vw, 4rem);
-        text-align: center;
-    }
-    
-    .hero-content {
-        position: relative;
-        left: auto;
-        top: auto;
-        transform: none;
-        margin: 20px auto;
-        max-width: 90%;
-    }
-    
-    .alter-section h2 {
-        font-size: clamp(3rem, 8vw, 5rem);
-    }
-    
     .tile {
         width: 100px;
         height: 100px;
@@ -533,43 +528,43 @@ body {
     }
     
     .tile:nth-child(1).forming-line {
-        top: 35%;
+        top: 65%;
     }
 
     .tile:nth-child(2).forming-line {
-        top: 43%;
+        top: 73%;
     }
 
     .tile:nth-child(3).forming-line {
-        top: 51%;
+        top: 81%;
     }
 
     .tile:nth-child(4).forming-line {
-        top: 59%;
+        top: 89%;
     }
 
     .tile:nth-child(5).forming-line {
-        top: 67%;
+        top: 97%;
     }
 
     .tile:nth-child(6).forming-line {
-        top: 75%;
+        top: 105%;
     }
 
     .tile:nth-child(7).forming-line {
-        top: 83%;
+        top: 113%;
     }
 
     .tile:nth-child(8).forming-line {
-        top: 91%;
+        top: 121%;
     }
 
     .tile:nth-child(9).forming-line {
-        top: 99%;
+        top: 129%;
     }
 
     .tile:nth-child(10).forming-line {
-        top: 107%;
+        top: 137%;
     }
     
     .gameboard-section {
@@ -577,88 +572,100 @@ body {
     }
 }
 
+@media (max-width: 768px) {
+    .tile {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .tile-text {
+        font-size: 0.8rem;
+        padding: 5px;
+    }
+}
+
 @media (min-width: 769px) and (max-width: 1024px) {
-    /* iPad and tablet spacing - 7% gaps */
+    /* iPad and tablet spacing */
     .tile:nth-child(1).forming-line {
-        top: 35%;
+        top: 65%;
     }
 
     .tile:nth-child(2).forming-line {
-        top: 42%;
+        top: 72%;
     }
 
     .tile:nth-child(3).forming-line {
-        top: 49%;
+        top: 79%;
     }
 
     .tile:nth-child(4).forming-line {
-        top: 56%;
+        top: 86%;
     }
 
     .tile:nth-child(5).forming-line {
-        top: 63%;
+        top: 93%;
     }
 
     .tile:nth-child(6).forming-line {
-        top: 70%;
+        top: 100%;
     }
 
     .tile:nth-child(7).forming-line {
-        top: 77%;
+        top: 107%;
     }
 
     .tile:nth-child(8).forming-line {
-        top: 84%;
+        top: 114%;
     }
 
     .tile:nth-child(9).forming-line {
-        top: 91%;
+        top: 121%;
     }
 
     .tile:nth-child(10).forming-line {
-        top: 98%;
+        top: 128%;
     }
 }
 
 @media (min-width: 1025px) {
-    /* Laptop and desktop spacing - 7% gaps */
+    /* Laptop and desktop spacing */
     .tile:nth-child(1).forming-line {
-        top: 35%;
+        top: 65%;
     }
 
     .tile:nth-child(2).forming-line {
-        top: 42%;
+        top: 72%;
     }
 
     .tile:nth-child(3).forming-line {
-        top: 49%;
+        top: 79%;
     }
 
     .tile:nth-child(4).forming-line {
-        top: 56%;
+        top: 86%;
     }
 
     .tile:nth-child(5).forming-line {
-        top: 63%;
+        top: 93%;
     }
 
     .tile:nth-child(6).forming-line {
-        top: 70%;
+        top: 100%;
     }
 
     .tile:nth-child(7).forming-line {
-        top: 77%;
+        top: 107%;
     }
 
     .tile:nth-child(8).forming-line {
-        top: 84%;
+        top: 114%;
     }
 
     .tile:nth-child(9).forming-line {
-        top: 91%;
+        top: 121%;
     }
 
     .tile:nth-child(10).forming-line {
-        top: 98%;
+        top: 128%;
     }
 }
