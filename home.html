@@ -175,12 +175,25 @@
                 currentScreen++;
                 updateScreens();
                 
+                // Reset scroll delta when transitioning screens
+                scrollDelta = 0;
+                
                 if (currentScreen === totalScreens - 1) {
                     setTimeout(() => {
                         document.body.style.overflowY = 'auto';
                         showStaticContent();
                     }, 1000);
                 }
+            }
+        }
+
+        function prevScreen() {
+            if (currentScreen > 0) {
+                currentScreen--;
+                updateScreens();
+                
+                // Reset scroll delta when transitioning screens
+                scrollDelta = 0;
             }
         }
 
