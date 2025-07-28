@@ -184,6 +184,11 @@
             }
         }
 
+        function proceedToStaticContent() {
+            document.body.style.overflowY = 'auto';
+            showStaticContent();
+        }
+
         function showStaticContent() {
             const container = document.querySelector('.container');
             const staticContent = document.querySelector('.static-content');
@@ -231,8 +236,7 @@
             
             // Allow scrolling down from screen 5 to proceed to static content
             if (currentScreen === totalScreens - 1 && e.deltaY > 0) {
-                document.body.style.overflowY = 'auto';
-                showStaticContent();
+                proceedToStaticContent();
                 return;
             }
             
@@ -302,8 +306,7 @@
                 
                 // If on screen 5 and pressing down, show static content
                 if (currentScreen === totalScreens - 1) {
-                    document.body.style.overflowY = 'auto';
-                    showStaticContent();
+                    proceedToStaticContent();
                 } else {
                     nextScreen();
                 }
@@ -329,8 +332,7 @@
         if (continueIndicator) {
             continueIndicator.addEventListener('click', () => {
                 if (currentScreen === totalScreens - 1) {
-                    document.body.style.overflowY = 'auto';
-                    showStaticContent();
+                    proceedToStaticContent();
                 }
             });
         }
