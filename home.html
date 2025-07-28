@@ -229,9 +229,10 @@
         document.addEventListener('wheel', (e) => {
             if (isScrolling) return;
             
-            // Allow static content to scroll normally if we're at the last screen and scrolling down
+            // Allow scrolling down from screen 5 to proceed to static content
             if (currentScreen === totalScreens - 1 && e.deltaY > 0) {
                 document.body.style.overflowY = 'auto';
+                showStaticContent();
                 return;
             }
             
@@ -299,7 +300,7 @@
             if (e.key === 'ArrowDown' || e.key === ' ') {
                 e.preventDefault();
                 
-                // If on last screen, allow static content to show instead of blocking
+                // If on screen 5 and pressing down, show static content
                 if (currentScreen === totalScreens - 1) {
                     document.body.style.overflowY = 'auto';
                     showStaticContent();
