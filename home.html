@@ -229,7 +229,8 @@
         document.addEventListener('wheel', (e) => {
             if (isScrolling) return;
             
-            if (currentScreen === totalScreens - 1) {
+            // Allow static content to scroll normally if we're at the last screen and scrolling down
+            if (currentScreen === totalScreens - 1 && e.deltaY > 0) {
                 document.body.style.overflowY = 'auto';
                 return;
             }
@@ -297,7 +298,14 @@
             
             if (e.key === 'ArrowDown' || e.key === ' ') {
                 e.preventDefault();
-                nextScreen();
+                
+                // If on last screen, allow static content to show instead of blocking
+                if (currentScreen === totalScreens - 1) {
+                    document.body.style.overflowY = 'auto';
+                    showStaticContent();
+                } else {
+                    nextScreen();
+                }
                 
                 isScrolling = true;
                 clearTimeout(scrollTimeout);
