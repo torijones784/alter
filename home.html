@@ -150,6 +150,11 @@
         
         let isScrolling = false;
         let scrollTimeout;
+        
+        // Enhanced scroll handling for less sensitivity
+        let scrollDelta = 0;
+        const scrollThreshold = 100; // Minimum accumulated scroll needed to advance
+        let lastScrollTime = 0;
 
         function updateScreens() {
             screens.forEach((screen, index) => {
@@ -229,17 +234,34 @@
                 return;
             }
             
-            if (e.deltaY > 0) {
-                nextScreen();
-            } else {
-                prevScreen();
+            const currentTime = Date.now();
+            
+            // Reset scroll delta if too much time has passed (prevents accumulation over long periods)
+            if (currentTime - lastScrollTime > 150) {
+                scrollDelta = 0;
             }
             
-            isScrolling = true;
-            clearTimeout(scrollTimeout);
-            scrollTimeout = setTimeout(() => {
-                isScrolling = false;
-            }, 300);
+            lastScrollTime = currentTime;
+            
+            // Accumulate scroll delta
+            scrollDelta += Math.abs(e.deltaY);
+            
+            // Only advance screen when threshold is reached
+            if (scrollDelta >= scrollThreshold) {
+                if (e.deltaY > 0) {
+                    nextScreen();
+                } else {
+                    prevScreen();
+                }
+                
+                // Reset scroll delta and set scrolling flag
+                scrollDelta = 0;
+                isScrolling = true;
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    isScrolling = false;
+                }, 800); // Increased timeout for better control
+            }
         });
 
         let touchStartY = 0;
@@ -403,3 +425,5 @@
 
         updateScreens();
     </script>
+</body>
+</html>
