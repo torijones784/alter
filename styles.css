@@ -27,6 +27,7 @@ body {
 }
 
 .screen h1 {
+    font-family: 'Poppins', sans-serif;
     font-size: clamp(2.5rem, 8vw, 4rem);
     font-weight: 600;
     line-height: 1.2;
