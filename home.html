@@ -247,12 +247,6 @@
         document.addEventListener('wheel', (e) => {
             if (isScrolling) return;
             
-            // Allow scrolling down from screen 5 to proceed to static content
-            if (currentScreen === totalScreens - 1 && e.deltaY > 0) {
-                proceedToStaticContent();
-                return;
-            }
-            
             const currentTime = Date.now();
             
             // Reset scroll delta if too much time has passed (prevents accumulation over long periods)
@@ -262,7 +256,33 @@
             
             lastScrollTime = currentTime;
             
-            // Accumulate scroll delta
+            // Special handling for screen 5 - use same threshold logic but different action
+            if (currentScreen === totalScreens - 1) {
+                if (e.deltaY > 0) {
+                    // Scrolling down from screen 5 - accumulate to proceed to static content
+                    scrollDelta += Math.abs(e.deltaY);
+                    if (scrollDelta >= scrollThreshold) {
+                        scrollDelta = 0;
+                        proceedToStaticContent();
+                        return;
+                    }
+                } else {
+                    // Scrolling up from screen 5 - accumulate to go to previous screen
+                    scrollDelta += Math.abs(e.deltaY);
+                    if (scrollDelta >= scrollThreshold) {
+                        scrollDelta = 0;
+                        prevScreen();
+                        isScrolling = true;
+                        clearTimeout(scrollTimeout);
+                        scrollTimeout = setTimeout(() => {
+                            isScrolling = false;
+                        }, 800);
+                    }
+                }
+                return;
+            }
+            
+            // Normal screen handling (screens 1-4)
             scrollDelta += Math.abs(e.deltaY);
             
             // Only advance screen when threshold is reached
