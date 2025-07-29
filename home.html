@@ -17,6 +17,11 @@
             width: 100%;
             height: 100vh;
             z-index: 1000;
+            transition: transform 0.8s ease-out;
+        }
+        
+        .screen-container.exiting {
+            transform: translateY(-100vh);
         }
         
         .screen {
@@ -47,18 +52,11 @@
         
         /* Hide static content initially */
         .static-content {
-            display: block;
-            transform: translateY(100vh);
-            transition: transform 1s ease-out;
+            display: none;
         }
         
         .static-content.visible {
-            transform: translateY(0);
-        }
-        
-        .static-content.transitioning {
             display: block;
-            transform: translateY(100vh);
         }
         
         /* Ensure body doesn't scroll initially */
@@ -203,7 +201,6 @@
     </div>
 
     <script>
-        // smooth transition to static content
         let currentScreen = 0;
         const screens = document.querySelectorAll('.screen');
         const totalScreens = screens.length;
@@ -255,43 +252,31 @@
             const screenContainer = document.querySelector('.screen-container');
             const staticContent = document.querySelector('.static-content');
             
-            // Start the smooth transition
-            staticContent.classList.add('transitioning');
+            // Add exiting class to trigger smooth slide up animation
+            screenContainer.classList.add('exiting');
+            
+            // Show static content immediately but keep it below the sliding screens
             staticContent.classList.add('visible');
             
-            // Monitor the transition to remove screens when static content reaches top
-            function checkTransitionProgress() {
-                const rect = staticContent.getBoundingClientRect();
-                
-                // When static content reaches the top of viewport, hide screens
-                if (rect.top <= 0) {
-                    screenContainer.style.display = 'none';
-                    document.body.classList.remove('screen-mode');
-                    document.body.style.overflow = 'auto';
-                    
-                    // Reset scroll position and clean up
-                    window.scrollTo(0, 0);
-                    
-                    // Trigger strike-through animations
-                    setTimeout(() => {
-                        const strikeElements = document.querySelectorAll('.strike-through');
-                        strikeElements.forEach((element, index) => {
-                            setTimeout(() => {
-                                element.style.animationDelay = `${index * 0.5}s`;
-                                element.style.opacity = '1';
-                            }, index * 500);
-                        });
-                    }, 100);
-                    
-                    return; // Stop monitoring
-                }
-                
-                // Continue monitoring
-                requestAnimationFrame(checkTransitionProgress);
-            }
+            // Enable normal scrolling
+            document.body.classList.remove('screen-mode');
+            document.body.style.overflow = 'auto';
             
-            // Start monitoring the transition
-            requestAnimationFrame(checkTransitionProgress);
+            // After transition completes, hide the screen container
+            setTimeout(() => {
+                screenContainer.style.display = 'none';
+            }, 800); // Match the transition duration
+            
+            // Trigger strike-through animations
+            setTimeout(() => {
+                const strikeElements = document.querySelectorAll('.strike-through');
+                strikeElements.forEach((element, index) => {
+                    setTimeout(() => {
+                        element.style.animationDelay = `${index * 0.5}s`;
+                        element.style.opacity = '1';
+                    }, index * 500);
+                });
+            }, 400); // Start animations mid-transition for better timing
         }
 
         // Wheel event handling
