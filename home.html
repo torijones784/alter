@@ -155,6 +155,7 @@
         let scrollDelta = 0;
         const scrollThreshold = 100; // Minimum accumulated scroll needed to advance
         let lastScrollTime = 0;
+        let lastScrollDirection = 0; // Track scroll direction to reset delta on direction change
 
         function updateScreens() {
             screens.forEach((screen, index) => {
@@ -248,13 +249,15 @@
             if (isScrolling) return;
             
             const currentTime = Date.now();
+            const currentScrollDirection = e.deltaY > 0 ? 1 : -1;
             
-            // Reset scroll delta if too much time has passed (prevents accumulation over long periods)
-            if (currentTime - lastScrollTime > 150) {
+            // Reset scroll delta if too much time has passed OR if scroll direction changed
+            if (currentTime - lastScrollTime > 150 || lastScrollDirection !== currentScrollDirection) {
                 scrollDelta = 0;
             }
             
             lastScrollTime = currentTime;
+            lastScrollDirection = currentScrollDirection;
             
             // Special handling for screen 5 - use same threshold logic but different action
             if (currentScreen === totalScreens - 1) {
