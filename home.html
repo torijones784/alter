@@ -201,7 +201,6 @@
     </div>
 
     <script>
-        // final version??
         let currentScreen = 0;
         const screens = document.querySelectorAll('.screen');
         const totalScreens = screens.length;
@@ -259,10 +258,9 @@
             // Show static content immediately but keep it below the sliding screens
             staticContent.classList.add('visible');
             
-            // Enable normal scrolling and reset to top
+            // Enable normal scrolling
             document.body.classList.remove('screen-mode');
             document.body.style.overflow = 'auto';
-            window.scrollTo(0, 0);
             
             // After transition completes, hide the screen container
             setTimeout(() => {
