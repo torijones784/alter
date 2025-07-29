@@ -248,6 +248,26 @@
         document.addEventListener('wheel', (e) => {
             if (isScrolling) return;
             
+            // Special handling for screen 5 - no accumulation, just direct action
+            if (currentScreen === totalScreens - 1) {
+                if (e.deltaY > 0) {
+                    // Scrolling down from screen 5 - proceed to static content
+                    isScrolling = true;
+                    proceedToStaticContent();
+                    return;
+                } else {
+                    // Scrolling up from screen 5 - go to previous screen
+                    isScrolling = true;
+                    prevScreen();
+                    clearTimeout(scrollTimeout);
+                    scrollTimeout = setTimeout(() => {
+                        isScrolling = false;
+                    }, 800);
+                    return;
+                }
+            }
+            
+            // Normal accumulation logic for screens 1-4
             const currentTime = Date.now();
             const currentScrollDirection = e.deltaY > 0 ? 1 : -1;
             
@@ -259,33 +279,6 @@
             lastScrollTime = currentTime;
             lastScrollDirection = currentScrollDirection;
             
-            // Special handling for screen 5 - use same threshold logic but different action
-            if (currentScreen === totalScreens - 1) {
-                if (e.deltaY > 0) {
-                    // Scrolling down from screen 5 - accumulate to proceed to static content
-                    scrollDelta += Math.abs(e.deltaY);
-                    if (scrollDelta >= scrollThreshold) {
-                        scrollDelta = 0;
-                        proceedToStaticContent();
-                        return;
-                    }
-                } else {
-                    // Scrolling up from screen 5 - accumulate to go to previous screen
-                    scrollDelta += Math.abs(e.deltaY);
-                    if (scrollDelta >= scrollThreshold) {
-                        scrollDelta = 0;
-                        prevScreen();
-                        isScrolling = true;
-                        clearTimeout(scrollTimeout);
-                        scrollTimeout = setTimeout(() => {
-                            isScrolling = false;
-                        }, 800);
-                    }
-                }
-                return;
-            }
-            
-            // Normal screen handling (screens 1-4)
             scrollDelta += Math.abs(e.deltaY);
             
             // Only advance screen when threshold is reached
@@ -302,7 +295,7 @@
                 clearTimeout(scrollTimeout);
                 scrollTimeout = setTimeout(() => {
                     isScrolling = false;
-                }, 800); // Increased timeout for better control
+                }, 800);
             }
         });
 
