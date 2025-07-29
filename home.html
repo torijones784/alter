@@ -188,7 +188,6 @@
     </div>
 
     <script>
-        // new method
         let currentScreen = 0;
         const screens = document.querySelectorAll('.screen');
         const totalScreens = screens.length;
@@ -270,9 +269,13 @@
             lastScrollTime = currentTime;
             lastScrollDirection = currentScrollDirection;
             
-            // Special handling for screen 5
+            // Special handling for screen 5 - still use accumulation for consistency
             if (currentScreen === totalScreens - 1 && e.deltaY > 0) {
-                showStaticContent();
+                scrollDelta += Math.abs(e.deltaY);
+                if (scrollDelta >= scrollThreshold) {
+                    showStaticContent();
+                    return;
+                }
                 return;
             }
             
@@ -290,7 +293,7 @@
                 clearTimeout(scrollTimeout);
                 scrollTimeout = setTimeout(() => {
                     isScrolling = false;
-                }, 300);
+                }, 800); // Increased timeout for better control
             }
         });
 
