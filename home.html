@@ -8,30 +8,82 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Screen container with absolute positioning */
+        .screen-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 1000;
+        }
+        
+        .screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            transform: translateY(100vh);
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        
+        .screen.active {
+            transform: translateY(0);
+        }
+        
+        .screen.prev {
+            transform: translateY(-100vh);
+        }
+        
+        .screen.next {
+            transform: translateY(100vh);
+        }
+        
+        /* Hide static content initially */
+        .static-content {
+            display: none;
+        }
+        
+        .static-content.visible {
+            display: block;
+        }
+        
+        /* Ensure body doesn't scroll initially */
+        body.screen-mode {
+            overflow: hidden;
+            height: 100vh;
+        }
+    </style>
 </head>
-<body>
-    <div class="container">
+<body class="screen-mode">
+    <div class="screen-container">
         <div class="screen screen-1 active">
             <h1>If you are:</h1>
             <div class="scroll-indicator"></div>
         </div>
         
-        <div class="screen screen-2 next">
+        <div class="screen screen-2">
             <h1>Over working on projects you don't care about</h1>
             <div class="scroll-indicator"></div>
         </div>
         
-        <div class="screen screen-3 next">
+        <div class="screen screen-3">
             <h1>Sick of wondering if you'll be laid off</h1>
             <div class="scroll-indicator"></div>
         </div>
         
-        <div class="screen screen-4 next">
+        <div class="screen screen-4">
             <h1>Tired of the hourly grind</h1>
             <div class="scroll-indicator"></div>
         </div>
         
-        <div class="screen screen-5 next">
+        <div class="screen screen-5">
             <h1>Then this is for you</h1>
             <div class="continue-indicator">Continue ↓</div>
         </div>
@@ -144,20 +196,18 @@
     </div>
 
     <script>
-        // true/false method
         let currentScreen = 0;
         const screens = document.querySelectorAll('.screen');
         const totalScreens = screens.length;
         
         let isScrolling = false;
         let scrollTimeout;
-        let hasExitedScreens = false; // Simple flag to track if user has moved past screens
         
-        // Enhanced scroll handling for less sensitivity
+        // Simplified scroll handling with accumulation for sensitivity
         let scrollDelta = 0;
-        const scrollThreshold = 100; // Minimum accumulated scroll needed to advance
+        const scrollThreshold = 100;
         let lastScrollTime = 0;
-        let lastScrollDirection = 0; // Track scroll direction to reset delta on direction change
+        let lastScrollDirection = 0;
 
         function updateScreens() {
             screens.forEach((screen, index) => {
@@ -177,16 +227,7 @@
             if (currentScreen < totalScreens - 1) {
                 currentScreen++;
                 updateScreens();
-                
-                // Reset scroll delta when transitioning screens
-                scrollDelta = 0;
-                
-                if (currentScreen === totalScreens - 1) {
-                    setTimeout(() => {
-                        document.body.style.overflowY = 'auto';
-                        showStaticContent();
-                    }, 1000);
-                }
+                resetScrollDelta();
             }
         }
 
@@ -194,25 +235,25 @@
             if (currentScreen > 0) {
                 currentScreen--;
                 updateScreens();
-                
-                // Reset scroll delta when transitioning screens
-                scrollDelta = 0;
+                resetScrollDelta();
             }
         }
 
-        function proceedToStaticContent() {
-            if (!hasExitedScreens) {
-                hasExitedScreens = true;
-                document.body.style.overflowY = 'auto';
-                showStaticContent();
-            }
+        function resetScrollDelta() {
+            scrollDelta = 0;
         }
 
         function showStaticContent() {
-            const container = document.querySelector('.container');
+            const screenContainer = document.querySelector('.screen-container');
             const staticContent = document.querySelector('.static-content');
             
+            // Hide screen container and show static content
+            screenContainer.style.display = 'none';
             staticContent.classList.add('visible');
+            
+            // Enable normal scrolling
+            document.body.classList.remove('screen-mode');
+            document.body.style.overflow = 'auto';
             
             // Trigger strike-through animations
             setTimeout(() => {
@@ -223,47 +264,17 @@
                         element.style.opacity = '1';
                     }, index * 500);
                 });
-            }, 1000);
-            
-            function checkScrollPosition() {
-                const heroSection = document.querySelector('.hero-section');
-                const heroRect = heroSection.getBoundingClientRect();
-                
-                if (heroRect.top <= 0) {
-                    container.remove();
-                    document.body.style.height = 'auto';
-                    document.body.style.minHeight = '100vh';
-                    
-                    window.scrollTo(0, 0);
-                    
-                    window.removeEventListener('scroll', checkScrollPosition);
-                }
-            }
-            
-            window.addEventListener('scroll', checkScrollPosition);
+            }, 100);
         }
 
-        function prevScreen() {
-            if (currentScreen > 0) {
-                currentScreen--;
-                updateScreens();
-            }
-        }
-
+        // Wheel event handling
         document.addEventListener('wheel', (e) => {
-            if (isScrolling || hasExitedScreens) return;
+            if (isScrolling) return;
             
-            // Special handling for screen 5 - simple detection
-            if (currentScreen === totalScreens - 1 && e.deltaY > 0) {
-                proceedToStaticContent();
-                return;
-            }
-            
-            // Normal accumulation logic for all screens (including up from screen 5)
             const currentTime = Date.now();
             const currentScrollDirection = e.deltaY > 0 ? 1 : -1;
             
-            // Reset scroll delta if too much time has passed OR if scroll direction changed
+            // Reset scroll delta if direction changed or too much time passed
             if (currentTime - lastScrollTime > 150 || lastScrollDirection !== currentScrollDirection) {
                 scrollDelta = 0;
             }
@@ -271,9 +282,19 @@
             lastScrollTime = currentTime;
             lastScrollDirection = currentScrollDirection;
             
+            // Special handling for screen 5 - still use accumulation for consistency
+            if (currentScreen === totalScreens - 1 && e.deltaY > 0) {
+                scrollDelta += Math.abs(e.deltaY);
+                if (scrollDelta >= scrollThreshold) {
+                    showStaticContent();
+                    return;
+                }
+                return;
+            }
+            
+            // Accumulate scroll for sensitivity control
             scrollDelta += Math.abs(e.deltaY);
             
-            // Only advance screen when threshold is reached
             if (scrollDelta >= scrollThreshold) {
                 if (e.deltaY > 0) {
                     nextScreen();
@@ -281,16 +302,15 @@
                     prevScreen();
                 }
                 
-                // Reset scroll delta and set scrolling flag
-                scrollDelta = 0;
                 isScrolling = true;
                 clearTimeout(scrollTimeout);
                 scrollTimeout = setTimeout(() => {
                     isScrolling = false;
-                }, 800);
+                }, 800); // Increased timeout for better control
             }
         });
 
+        // Touch handling
         let touchStartY = 0;
         let touchEndY = 0;
         
@@ -305,6 +325,11 @@
             const touchDiff = touchStartY - touchEndY;
             
             if (Math.abs(touchDiff) > 50) {
+                if (currentScreen === totalScreens - 1 && touchDiff > 0) {
+                    showStaticContent();
+                    return;
+                }
+                
                 if (touchDiff > 0) {
                     nextScreen();
                 } else {
@@ -319,15 +344,15 @@
             }
         });
 
+        // Keyboard handling
         document.addEventListener('keydown', (e) => {
-            if (isScrolling || hasExitedScreens) return;
+            if (isScrolling) return;
             
             if (e.key === 'ArrowDown' || e.key === ' ') {
                 e.preventDefault();
                 
-                // If on screen 5 and pressing down, show static content
                 if (currentScreen === totalScreens - 1) {
-                    proceedToStaticContent();
+                    showStaticContent();
                 } else {
                     nextScreen();
                 }
@@ -349,21 +374,13 @@
             }
         });
 
+        // Continue indicator click
         const continueIndicator = document.querySelector('.continue-indicator');
         if (continueIndicator) {
-            continueIndicator.addEventListener('click', () => {
-                if (currentScreen === totalScreens - 1) {
-                    proceedToStaticContent();
-                }
-            });
+            continueIndicator.addEventListener('click', showStaticContent);
         }
 
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        // Gameboard scroll animation
+        // Gameboard scroll animation (only runs after static content is shown)
         function handleGameboardScroll() {
             const gameboardSection = document.querySelector('.gameboard-section');
             const tiles = document.querySelectorAll('.tile');
@@ -375,53 +392,36 @@
             const sectionHeight = rect.height;
             const windowHeight = window.innerHeight;
             
-            // Check if we're in the gameboard section
             if (sectionTop < windowHeight && sectionTop + sectionHeight > 0) {
-                // Calculate how far we've scrolled into the section
                 const scrollIntoSection = Math.max(0, windowHeight - sectionTop);
                 const scrollProgress = scrollIntoSection / sectionHeight;
                 
-                // Only start animation after 30% through the section
                 if (scrollProgress > 0.3) {
-                    // Calculate animation progress from 30% to 100%
                     const animationProgress = Math.min(1, (scrollProgress - 0.3) / 0.7);
-                    
-                    // Divide the animation progress into discrete steps for each tile
                     const totalTiles = tiles.length;
                     const stepSize = 1 / totalTiles;
                     const completedTiles = Math.floor(animationProgress / stepSize);
                     
                     tiles.forEach((tile, index) => {
                         if (index < completedTiles) {
-                            // Previous tiles are fully in position
                             tile.classList.add('forming-line');
                         } else if (index === completedTiles && animationProgress >= index * stepSize) {
-                            // Current tile should start moving
                             tile.classList.add('forming-line');
                         } else {
-                            // Future tiles remain scattered
                             tile.classList.remove('forming-line');
                         }
                     });
                 } else {
-                    // Keep all tiles scattered if we haven't reached 30% yet
                     tiles.forEach(tile => {
                         tile.classList.remove('forming-line');
                     });
                 }
             } else {
-                // Reset all tiles if we're outside the section
                 tiles.forEach(tile => {
                     tile.classList.remove('forming-line');
                 });
             }
         }
-
-        // Add scroll listener for gameboard effect
-        window.addEventListener('scroll', handleGameboardScroll);
-        
-        // Initial call to set up the effect
-        handleGameboardScroll();
 
         // Email form submission
         document.querySelector('.email-form').addEventListener('submit', function(e) {
@@ -429,7 +429,6 @@
             const email = document.querySelector('.email-input').value;
             const button = document.querySelector('.submit-button');
             
-            // Simple validation
             if (email && email.includes('@')) {
                 button.textContent = 'Welcome to Alter!';
                 button.style.background = '#88304e';
@@ -455,6 +454,14 @@
             alert('Video preview would open here! This is where you\'d integrate your platform demo video.');
         });
 
+        // Add scroll listener for gameboard effect (only active after static content is shown)
+        window.addEventListener('scroll', () => {
+            if (document.querySelector('.static-content').classList.contains('visible')) {
+                handleGameboardScroll();
+            }
+        });
+
+        // Initialize
         updateScreens();
     </script>
 </body>
