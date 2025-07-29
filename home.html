@@ -47,11 +47,18 @@
         
         /* Hide static content initially */
         .static-content {
-            display: none;
+            display: block;
+            transform: translateY(100vh);
+            transition: transform 1s ease-out;
         }
         
         .static-content.visible {
+            transform: translateY(0);
+        }
+        
+        .static-content.transitioning {
             display: block;
+            transform: translateY(100vh);
         }
         
         /* Ensure body doesn't scroll initially */
@@ -196,6 +203,7 @@
     </div>
 
     <script>
+        // smooth transition to static content
         let currentScreen = 0;
         const screens = document.querySelectorAll('.screen');
         const totalScreens = screens.length;
@@ -247,24 +255,43 @@
             const screenContainer = document.querySelector('.screen-container');
             const staticContent = document.querySelector('.static-content');
             
-            // Hide screen container and show static content
-            screenContainer.style.display = 'none';
+            // Start the smooth transition
+            staticContent.classList.add('transitioning');
             staticContent.classList.add('visible');
             
-            // Enable normal scrolling
-            document.body.classList.remove('screen-mode');
-            document.body.style.overflow = 'auto';
-            
-            // Trigger strike-through animations
-            setTimeout(() => {
-                const strikeElements = document.querySelectorAll('.strike-through');
-                strikeElements.forEach((element, index) => {
+            // Monitor the transition to remove screens when static content reaches top
+            function checkTransitionProgress() {
+                const rect = staticContent.getBoundingClientRect();
+                
+                // When static content reaches the top of viewport, hide screens
+                if (rect.top <= 0) {
+                    screenContainer.style.display = 'none';
+                    document.body.classList.remove('screen-mode');
+                    document.body.style.overflow = 'auto';
+                    
+                    // Reset scroll position and clean up
+                    window.scrollTo(0, 0);
+                    
+                    // Trigger strike-through animations
                     setTimeout(() => {
-                        element.style.animationDelay = `${index * 0.5}s`;
-                        element.style.opacity = '1';
-                    }, index * 500);
-                });
-            }, 100);
+                        const strikeElements = document.querySelectorAll('.strike-through');
+                        strikeElements.forEach((element, index) => {
+                            setTimeout(() => {
+                                element.style.animationDelay = `${index * 0.5}s`;
+                                element.style.opacity = '1';
+                            }, index * 500);
+                        });
+                    }, 100);
+                    
+                    return; // Stop monitoring
+                }
+                
+                // Continue monitoring
+                requestAnimationFrame(checkTransitionProgress);
+            }
+            
+            // Start monitoring the transition
+            requestAnimationFrame(checkTransitionProgress);
         }
 
         // Wheel event handling
